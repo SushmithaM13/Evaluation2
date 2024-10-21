@@ -1,0 +1,23 @@
+#cart{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
+table,th,td{
+    border: 1px solid black;
+}
+th,td{
+    padding: 10px;
+}
+img{
+   width: 100px;
+   height: auto; 
+}
+#totalPrice{
+    display: flex;
+    justify-content: flex-end;
+}

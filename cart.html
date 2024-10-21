@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./cart.css">
+</head>
+<body>
+    <div id="cart">
+        <h1>Cart page</h1>
+        <a href="./index.html">Products</a>
+    </div>
+    <table id="cart-list">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Products Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>TotalPrice</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <p id="totalPrice"></p>
+</body>
+</html>
+<script>
+    const cartProducts=JSON.parse(localStorage.getItem("cart")) || [];
+    let cartList = document.getElementById("cart-list");
+    if(cartProducts.length){
+        displayCartProds(cartProducts);
+    }else{
+        cartList.innerHTML = `No products in cart`;
+    }
+    function displayCartProds(Products){
+        Products.forEach(prod=>{
+            const productDiv = document.createElement("tr");
+            productDiv.innerHTML = `
+            <td>
+                <img src="${prod.image}"/>
+            </td>
+            <td>${prod.title}</td>
+            <td>$ ${prod.price}</td>
+            <td>${prod.quantity}</td>
+             <td>${prod.price * prod.quantity}</td>
+            `;
+            document.querySelector("tbody").append(productDiv);
+        });
+        const total = Products.reduce((acc,curr)=>{
+            return acc + (curr.price * curr.quantity);
+        }, 0);
+        console.log(total);
+        document.getElementById("totalPrice").innerHTML=`$ ${total.toFixed(2)}`
+    }
+</script>
